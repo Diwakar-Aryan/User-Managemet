@@ -1,0 +1,19 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+require("dotenv/config");
+class configClass {
+    constructor() { }
+    static initialize() {
+        if (!this._instance) {
+            this._instance = new configClass();
+        }
+        return this._instance;
+    }
+    get MongoConfigDetails() {
+        return { mongo_uri: process.env.mongo_uri || '', mongo_db_name: process.env.mongo_db_name };
+    }
+    get ConfigDetails() {
+        return { privateKey: process.env.privateKey || '', pubicKey: process.env.publicKey || '' };
+    }
+}
+exports.default = configClass;

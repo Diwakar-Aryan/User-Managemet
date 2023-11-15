@@ -1,0 +1,9 @@
+.login{
+    position:fixed;
+  top:50%;
+  margin-left: 750px;
+}
+.login-btn {
+    background: none;
+    border: none;
+}
