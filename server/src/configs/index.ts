@@ -19,5 +19,9 @@ export default class configClass {
     return {privateKey : process.env.privateKey || '', pubicKey : process.env.publicKey || ''}
   }
 
+  get Salt(){
+    return {salt:process.env.salt || ''}
+  }
+
  
 }

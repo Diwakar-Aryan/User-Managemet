@@ -1,7 +1,8 @@
 import axios from 'axios'
 import qs from 'querystring'
 import jwt from 'jsonwebtoken'
-
+import CryptoJS from 'crypto-js'
+import configClass from '../configs'
 const config = {
     NEXT_PUBLIC_GOOGLE_CLIENT_ID:
     '40371381493-jgkjo26qsn0qbrna3be9iab89mgq90do.apps.googleusercontent.com',
@@ -33,6 +34,18 @@ export async function getGoogleOAuthTokens ({code}:{code:string}) {
     }
 
 }
+
 export function jwtDecode(token: string){
     return jwt.decode(token)
+}
+
+export function generatePasswordSalt(pass:string){
+    return CryptoJS.PBKDF2(pass,configClass.initialize().Salt.salt,{keySize: 8}).toString()
+}
+
+export function comparePassword(pass:string,storedPass: string){
+    if(storedPass === CryptoJS.PBKDF2(pass,configClass.initialize().Salt.salt,{keySize: 8}).toString()){
+        return true
+    }
+    return false
 }

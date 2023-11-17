@@ -3,11 +3,11 @@ import {} from 'mongodb'
 let mongoClient = MongoClientClass.initialize()
 
 
-export async function findOne(collection_name: string){
+export async function findOne(collection_name: string,params:any){
     try {
         let collection = mongoClient.collection(collection_name)
-        let data = await collection.find({}).toArray();        
-        return data;
+        let data = await collection.find(params).toArray();        
+        return data[0] || {};
     } catch (error) {
         console.log(error);
         throw error
